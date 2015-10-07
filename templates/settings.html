@@ -1,0 +1,335 @@
+<div class="container">
+	<h1>Settings</h1>
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Player Name</legend>
+            <div class="control-group" id="environment">
+				<div class="control-group">
+				<label class="control-label" for="hostname">Player name</label>
+					<div class="controls">
+						<input class="input-large" class="input-large" type="text" id="hostname" name="hostname" value="$_hostname" autocomplete="off">
+					</div>
+				</div>
+			</div>
+			<p>
+				Changes how your Volumio device is called. This affects Player Name, Airplay Name and UPnP Name. A reboot is required for 
+				changes to take effect.
+			</p>
+		<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="apply" name="apply" type="submit">Apply</button>
+			</div>
+		</fieldset>
+	</form>
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Services management</legend>
+			<p>Enable or disable certain Volumio functionalities</p>
+			<div class="control-group">
+				<label class="control-label">Airplay</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggleshairport2" >ON</label>
+						
+$_system_select[shairport1]
+
+						<label class="toggle-radio" for="toggleshairport1">OFF</label>
+
+$_system_select[shairport0]				
+						
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">UPNP Control</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggleupnpmpdcli2" >ON</label>
+						
+$_system_select[upnpmpdcli1]
+
+						<label class="toggle-radio" for="toggleupnpmpdcli1">OFF</label>
+
+$_system_select[upnpmpdcli0]				
+						
+					</div>
+				</div>
+			</div> 
+			<div class="control-group">
+				<label class="control-label">UPNP\DLNA Indexing</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggledjmount2" >ON</label>
+						
+$_system_select[djmount1]
+
+						<label class="toggle-radio" for="toggledjmount1">OFF</label>
+
+$_system_select[djmount0]				
+						
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">DLNA Library Server</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggleminidlna2" >ON</label>
+						
+$_system_select[minidlna1]
+
+						<label class="toggle-radio" for="toggleminidlna1">OFF</label>
+
+$_system_select[minidlna0]				
+						
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="apply" name="apply" type="submit">Apply</button>
+			</div>
+		</fieldset>
+	</form>
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Streaming Services</legend>
+			<p>Enable or disable Spotify©  Streaming Service (Requires a Spotify© Premium Account)</p>
+			<div class="control-group">
+				<label class="control-label">Spotify Service</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="togglespotify2" >ON</label>
+						
+$_system_select[spotify1]
+
+						<label class="toggle-radio" for="togglespotify1">OFF</label>
+
+$_system_select[spotify0]				
+						
+					</div>
+				</div>
+			<div id="displayspotifyblock" class="control-group subgroup">	
+			<div class="control-group">
+				<label class="control-label" for="spotusername">Spotify Username</label>
+				<div class="controls">
+					<input class="input-large" class="input-block-level" type="text" id="spotusername" name="spotusername" value="$_spotusername" data-trigger="change" >
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="spotpassword">Spotify Password</label>
+				<div class="controls">
+					<input class="input-large" class="input-block-level" type="password" id="spotpassword" name="spotpassword" value="$_spotpassword" data-trigger="change" >
+				</div>
+			</div>
+				
+			
+				<label class="control-label">Prefer Higher Quality Stream</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="togglespotifybitrate2" >ON</label>
+						
+$_system_select[spotifybitrate1]
+
+						<label class="toggle-radio" for="togglespotifybitrate1">OFF</label>
+
+$_system_select[spotifybitrate0]				
+						
+					</div>
+				<p>
+				Retrieve 320kbps Streams. Turn this off if you experience dropouts or if you have bandwith concerns.
+			</p>	
+				</div>
+			</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="apply" name="apply" type="submit">Apply</button>
+			</div>
+		</fieldset>
+	</form>
+	<div $_divi2s >
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>I2S driver</legend>
+			<p>Activate i2s driver for Raspberry PI compatible i2s DACs</p>
+			<div class="control-group">
+				<label class="control-label">I2S DAC</label>
+				<div class="controls">
+					<select class="input-large" name="i2s">		
+$_i2s[i2s]
+					</select>
+				</div>
+			</div>		
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="apply" name="apply" type="submit">Apply</button>
+			</div>
+		</fieldset>
+	</form>
+	</div>
+<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Miscellaneous</legend>
+			<p>Various & useful system settings</p>
+			<div class="control-group">
+				<label class="control-label">Startup Sound</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="togglestartupsound2" >ON</label>
+						
+$_system_select[startupsound1]
+
+						<label class="toggle-radio" for="togglestartupsound1">OFF</label>
+
+$_system_select[startupsound0]				
+						
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Library view</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggledisplaylib2" >ON</label>
+						
+$_system_select[displaylib1]
+
+						<label class="toggle-radio" for="toggledisplaylib1">OFF</label>
+
+$_system_select[displaylib0]				
+						
+					</div>
+					<span class="help-block">The library view will be displayed only when this setting is enabled AND, because of its layout, if the screen resolution allows it (bigger than 800x600).
+					WARNING: activating the library panel may have an impact on the client-side performances.</span>
+				</div>
+			</div>
+			<div id="displaylibastabblock" class="control-group subgroup">
+				<label class="control-label">Show as tab</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggledisplaylibastab2" >ON</label>
+						
+$_system_select[displaylibastab1]
+
+						<label class="toggle-radio" for="toggledisplaylibastab1">OFF</label>
+
+$_system_select[displaylibastab0]				
+						
+					</div>
+					<span class="help-block">If turned off, the library will be accessible from the "Browse" view.</span>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="apply" name="apply" type="submit">Apply</button>
+			</div>
+		</fieldset>
+	</form>
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Sound quality tweaks</legend>
+			<p>
+				These profiles include a set of performance tweaks that act on some system kernel parameters.<br>
+				It does not have anything to do with DSPs or other sound effects: the output is kept untouched (bit perfect).<br>
+				It happens that these parameters introduce an audible impact on the overall sound quality, acting on kernel latency parameters (and probably on the amount of overall<a href="http://www.thewelltemperedcomputer.com/KB/BitPerfectJitter.htm" title="Bit Perfect Jitter by Vincent Kars" target="_blank"> jitter</a>).<br>
+				Sound results may vary depending on where music is listened, so choose according to your personal taste.<br>
+				(If you can't hear any tangible differences... nevermind, just stick to the default settings.)
+			</p>
+			<div class="control-group">
+				<label class="control-label">Kernel profile</label>
+				<div class="controls">
+					<select class="input-large" name="orionprofile">
+					
+$_system_select[orionprofile]
+
+					</select>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="save" name="save" type="submit">Apply settings</button>
+			</div>
+		</fieldset>
+	</form>			
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Compatibility fixes</legend>
+			<p>For people suffering problems with some receivers and DACs.</p>
+			<div class="control-group">
+				<label class="control-label">CMedia fix</label>
+				<div class="controls">
+					<div class="toggle">
+						<label class="toggle-radio" for="toggleOption2" >ON</label>
+						
+$_system_select[cmediafix1]
+
+						<label class="toggle-radio" for="toggleOption1">OFF</label>
+
+$_system_select[cmediafix0]				
+						
+					</div>
+					<span class="help-block">For those who have a CM6631 receiver and experiment issues (noise, crackling) between tracks with different sample rates and/or bit depth.<br> 
+					A "dirty" fix that should avoid the problem, do NOT use if everything works normally.</span>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="apply" name="apply" type="submit">Apply fixes</button>
+			</div>
+		</fieldset>
+	</form>
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>System Updates</legend>
+			<p>&nbsp;</p>
+			<div class="control-group">
+				<label class="control-label">Check and retrieve System Updates</label>
+				<div class="controls">
+				<p><button class="btn btn-large btn-primary" type="submit" name="syscmd" value="updateui" id="syscmd-updateui"><i class="fa fa-paper-plane-o sx"></i>Check Updates</button></p>
+				<span class="help-block">You can check wether minor updates are available. The system will then retrieve them, if found. You'll be then asked to apply or ignore.</span>
+				</div>
+			</div>
+					</fieldset>
+	</form>
+	<!--
+	<form class="form-horizontal" data-validate="parsley" action="" method="post">
+        <fieldset>
+            <legend>Last.FM scrobbling</legend>
+            <div class="control-group" >
+                <label class="control-label" for="port">Port</label>
+                <div class="controls">
+                    <input class="input-large" class="input-large" type="text" id="lastfm_user" name="lastfm[user]" value="$_lastfm[user]" data-trigger="change">
+					<input class="input-large" class="input-large" type="text" id="lastfm_pass" name="lastfm[pass]" value="$_lastfm[pass]" data-trigger="change">
+                    <span class="help-block">This setting is the TCP port that is desired for the daemon to get assigned to.</span>
+                </div>
+            </div>
+		</fieldset>
+
+<form class="form-horizontal" method="post">
+		<fieldset>
+			<legend>Backup / Restore configuration</legend>
+			<p>&nbsp;</p>
+			<div class="control-group">
+				<label class="control-label">Backup player config</label>
+				<div class="controls">
+					<input class="btn" type="submit" name="syscmd" value="backup" id="syscmd-backup">
+				</div>
+			</div>
+					</fieldset>
+	</form>
+	<form class="form-horizontal" method="post">
+		<fieldset>
+			<div class="control-group" >
+				<label class="control-label" for="port">Configuration file</label>
+
+				<div class="controls">
+			
+			<div class="fileupload fileupload-new" data-provides="fileupload">
+					  <span class="btn btn-file"><span class="fileupload-new">restore</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+					  <span class="fileupload-preview"></span>
+					  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary btn-large" value="restore" name="syscmd" type="submit">Restore config</button>
+			</div>
+		</fieldset>
+	</form>
+		-->
+</div>

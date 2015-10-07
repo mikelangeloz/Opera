@@ -1,0 +1,181 @@
+<div class="tab-content">
+
+	<!-- -------------------- PLAYBACK PANEL -------------------- -->
+	<div id="playback" class="tab-pane active">
+		<div class="container txtmid">
+			<span id="currentartist"></span>
+			<span id="currentsong"></span>
+			<span id="currentalbum"></span>
+			<span id="playlist-position">&nbsp;</span>
+			<span id="format-bitrate"></span>
+
+			<div class="row-fluid">
+			
+				<div class="span4">
+					<div id="timeknob">
+						<div id="countdown" ms-user-select="none">
+							<input class="playbackknob" id="time" value="0" data-readonly="false" data-min="0" data-max="1000" data-width="100%" data-thickness="0.30" data-bgColor="#34495E" data-fgcolor="#4BBE87">
+						</div>
+						<span id="countdown-display"></span>
+						<span id="total"></span>
+					</div>
+					<div class="btn-toolbar">
+						<div class="btn-group">
+							<a id="repeat" class="btn btn-cmd btn-toggle" href="#notarget" title="Repeat"><i class="fa fa-repeat"></i></a>
+							<a id="random" class="btn btn-cmd btn-toggle" href="#notarget" title="Random"><i class="fa fa-random"></i></a>
+							<a id="single" class="btn btn-cmd btn-toggle" href="#notarget" title="Single"><i class="fa fa-refresh"></i></a>
+							<a id="consume" class="btn btn-cmd btn-toggle" href="#notarget" title="Consume Mode"><i class="fa fa-trash"></i></a>			
+						</div>
+					</div>
+				</div>
+				<div class="span4"><span id="currentalbumart"></span></div>
+
+				<div class="span4 volume">
+					<input class="volumeknob" id="volume" data-width="211" data-cursor="true" data-bgColor="#34495E" data-fgColor="#4BBE87" data-thickness=".25" data-angleArc="250" data-angleOffset="-125" data-skin="tron" value="66">	
+					<div class="btn-toolbar floatright">
+						<div class="btn-group">
+							<a id="volumedn" class="btn btn-cmd btn-volume" href="#notarget"><i class="fa fa-volume-down"></i></a>
+							<a id="volumemute" class="btn btn-cmd btn-volume" href="#notarget"><i class="fa fa-volume-off"></i> <i class="fa fa-exclamation"></i></a>
+							<!--<a id="ramplay" class="btn btn-cmd btn-toggle" title="Ramplay" href="#notarget"><i class="fa fa-copy"></i></a> -->
+							<a id="volumeup" class="btn btn-cmd btn-volume" href="#notarget"><i class="fa fa-volume-up"></i></a>
+							<!--<a id="dbupdate" class="btn btn-cmd" href="#notarget" title="Updating Music DB..."><i class="fa fa-refresh"></i></a>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- -------------------- DATABASE PANEL -------------------- -->
+	<div id="panel-sx" class="tab-pane">
+		<div class="btnlist btnlist-top">
+			<form id="db-search" action="javascript:getDB('search', '', 'file');">
+				<div class="input-append">
+					<input class="span2" id="db-search-keyword" type="text" value="" placeholder="Search">
+					<button class="btn" type="submit"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+			<div id="db-back">
+				<button class="btn"><i class="fa fa-arrow-left sx"></i> <em id="db-back-text">back</em></button>
+			
+			<span id="webradio-add">
+				<a href="#webradio-modal" data-toggle="modal" title="Add New WebRadio"><button class="btn"><i class="fa fa-plus"></i><em id="webradio-add-text"></em></button></a>
+			</span>
+			</div>
+		</div>
+		<div id="database">
+			<ul class="database">
+				<!--<li class="clearfix"><div class="db-entry">Unknown Song <span>Unknown Artist - Unknown Album</span></div></li>-->
+			</ul>
+		</div>
+		<div class="btnlist btnlist-bottom">
+			<div id="db-controls">
+				<button id="db-debug-btn" class="btn hide"><i class="fa fa-random"></i></button>
+				<button class="btn pl-firstPage"><i class="fa fa-angle-double-up"></i></button>
+				<button class="btn pl-lastPage"><i class="fa fa-angle-double-down"></i></button>
+			</div>
+			<div id="db-currentpath">
+				<i class="fa fa-folder-open"></i> <span>NAS/</span>
+			</div>
+		</div>		
+	</div>
+	
+	<!-- -------------------- PLAYLIST PANEL -------------------- -->
+	<div id="panel-dx" class="tab-pane">
+		<div class="btnlist btnlist-top">
+			<form id="pl-search" method="post" onSubmit="return false;">
+				<div class="input-append">
+					<input id="pl-filter" class="ttip" type="text" value="" placeholder="search in playlist..." data-placement="bottom" data-toggle="tooltip" data-original-title="Type here to search on the fly">
+					<button class="btn"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+			<div id="pl-filter-results"></div>
+		</div>
+		<div id="playlist">
+			<ul class="playlist">
+				<!--<li>Unknown Song <span>Unknown Artist - Unknown Album</span></li>-->
+			</ul>
+		</div>
+		<div class="btnlist btnlist-bottom">
+		
+			<div id="pl-controls">
+				<form id="pl-save" method="post" onSubmit="return false;">
+                                	<div class="input-append">
+						<input id="pl-saveName" class="ttip" type="text" value="" placeholder="Type playlist name" data-placement="bottom" data-toggle="tooltip">
+						<button id="pl-btnSave" class="btn"><i class="fa fa-floppy-o"></i></button>
+					</div>
+				</form>
+				<button id="pl-debug-btn" class="btn hide"><i class="fa fa-random"></i></button>
+				<button class="btn pl-firstPage"><i class="fa fa-angle-double-up"></i></button>
+				<button class="btn pl-lastPage"><i class="fa fa-angle-double-down"></i></button>
+			</div>
+			<form id="clearqueue" method="post">	
+			<input class="btn" type="submit" name="syscmd" value="Clear Queue" id="syscmd-clearqueue">
+			</form>
+		</div>
+	</div>
+
+	<!-- -------------------- LIBRARY PANEL -------------------- -->
+	<div id="panel-lib" class="tab-pane">
+		<div class="container txtmid">
+			<div id="lib-loader"><div id="loaderbg"></div><div id="loadercontent"><i class="fa fa-refresh fa-spin"></i>loading...</div></div>
+			<div id="lib-content">
+                <ul id="lib-tabs" class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#lib-genre" role="tab" data-toggle="tab">Genres</a></li>
+                    <li><a href="#lib-artist" role="tab" data-toggle="tab">Artists</a></li>
+                    <li><a href="#lib-album" role="tab" data-toggle="tab">Albums</a></li>
+                    <li><a href="#lib-file" role="tab" data-toggle="tab">Songs</a></li>
+                </ul>
+                <div class="tab-content">
+				<div id="lib-genre" class="tab-pane active">
+					<ul id="genresList"></ul>
+				</div>
+				<div id="lib-artist" class="tab-pane">
+					<ul id="artistsList"></ul>
+				</div>
+				<div id="lib-album" class="tab-pane">
+					<ul id="albumsList"></ul>
+				</div>
+				<div id="lib-file" class="tab-pane">
+					<ul id="songsList"></ul>
+					<div class="lib-showall"><a title="WARNING: depending on the number of songs to display, showing all songs may result in slowing down or freezing your navigation." href="#notarget" class="btn">Show all songs</a></div>
+					<div class="lib-playall"><a title="Play all" href="#notarget" class="btn"><i class="fa fa-play"></i></a></div>
+					<div class="lib-addall"><a title="Enqueue all" href="#notarget" class="btn"><i class="fa fa-plus"></i></a></div>
+				</div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div id="context-menus">
+	<div id="context-menu" class="context-menu">
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#notarget" data-cmd="add"><i class="fa fa-plus sx"></i> Add</a></li>
+			<li><a href="#notarget" data-cmd="addplay"><i class="fa fa-play sx"></i> Add and play</a></li>
+			<li><a href="#notarget" data-cmd="addreplaceplay"><i class="fa fa-share sx"></i> Add, replace and play</a></li>
+			<li><a href="#notarget" data-cmd="update"><i class="fa fa-refresh sx"></i> Update this folder</a></li>
+		</ul>
+	</div>
+	<div id="context-menu-root" class="context-menu">
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#notarget" data-cmd="update"><i class="fa fa-refresh sx"></i> Update this folder</a></li>
+		</ul>
+	</div>
+	<div id="context-menu-spotifytrack" class="context-menu">
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#notarget" data-cmd="spop-playtrackuri"><i class="fa fa-share sx"></i>Spotify Add, replace and play</a></li>
+			<li><a href="#notarget" data-cmd="spop-addtrackuri"><i class="fa fa-plus sx"></i>Spotify Add</a></li>
+			<li><a href="#notarget" data-cmd="spop-searchtitle"><i class="fa fa-headphones sx"></i>Search Title</a></li>
+			<li><a href="#notarget" data-cmd="spop-searchartist"><i class="fa fa-user sx"></i>Search Artist</a></li>
+			<li><a href="#notarget" data-cmd="spop-searchalbum"><i class="fa fa-circle sx"></i>Search Album</a></li>
+		</ul>
+	</div>
+	<div id="context-menu-spotifyplaylist" class="context-menu">
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#notarget" data-cmd="spop-playplaylistindex"><i class="fa fa-share sx"></i>Spotify Add, replace and play</a></li>
+			<li><a href="#notarget" data-cmd="spop-addplaylistindex"><i class="fa fa-plus sx"></i>Spotify Add</a></li>
+		</ul>
+	</div>
+</div>

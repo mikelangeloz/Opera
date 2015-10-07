@@ -1,0 +1,27 @@
+{
+  "name": "albumart",
+  "version": "1.0.0",
+  "description": "Album art plugin for Volumio2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "volumio_info": {
+    "plugin_type": "miscellanea"
+  },
+  "dependencies": {
+    "album-art": "^1.0.2",
+    "express": "^4.13.3",
+    "fast.js": "^0.1.1",
+    "file-download": "^0.1.2",
+    "fs-extra": "^0.24.0",
+    "ip": "^1.0.1",
+    "kew": "^0.7.0",
+    "node-uuid": "^1.4.3",
+    "nodetools": "^1.0.0",
+    "string": "^3.3.1",
+    "wireless-tools": "^0.14.0"
+  }
+}
