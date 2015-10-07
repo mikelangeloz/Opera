@@ -2,54 +2,10 @@
     <h1>MPD Configuration</h1>
     <p>If you mess up with this configuration you can <a data-toggle="modal" href="#mpd-config-defaults">reset to default</a>.</p>
     <form class="form-horizontal" data-validate="parsley" action="" method="post">
-        <fieldset>
-		
-            <legend>Audio Output</legend>
-            <p>Here you can select your desired output option. Default is onboard DAC, if any. At the moment, Volumio supports only one Output at the time. </p>
-            <br>
-            <div class="control-group">
-			<label class="control-label" for="mixer-type">Audio Output</label>
-			<div class="controls">
-	
-                    <select id="device" name="conf[device]" class="input-large">
-					
-					$_mpd_select[device]
-					
-                    </select>
-				</div>
-            </div>
-        </fieldset>
-                    
-			
-        </fieldset>
-        <fieldset>
-            <legend>Volume control mixer</legend>
-            <p>These are the global volume control settings. By default, Hardware Mixer is enabled. However, if you cannot set the Volume, switching to Software Volume Control will solve your issue, costing in decreased quality.</p>
-            <br>
-            <div class="control-group">
-                <label class="control-label" for="mixer-type">Mixer type</label>
-                <div class="controls">
-	
-                    <select id="mixer-type" name="conf[mixer_type]" class="input-large">
 
-					$_mpd_select[mixer_type]
-					
-                    </select>
 
-                    <span class="help-block"><span class="help-block">
-					<strong>Hardware</strong> - Works only with some DACS and enables volume control without affecting sound quality. Best of both worlds.<br>
-                    <strong>Software</strong> - Works with every DAC available, but affectes audio quality.<br>
-                    <strong>Disabled</strong> - No remote volume control available, preserves audio quality but harms couch potatoes.</span></span>
-                </div>
-            </div>
-        </fieldset>
-
-        <div class="form-actions">
-            <button type="button" class="btn btn-large">Cancel</button>
-            <button type="submit" class="btn btn-primary btn-large" name="save" value="save">Save changes</button>
-        </div>
 		<fieldset>
-            <legend>General music daemon options</legend>
+            <legend>General Playback options</legend>
             <div class="control-group" >
                 <!--<label class="control-label" for="port">Port</label>
                 <div class="controls">
@@ -70,44 +26,10 @@
                     The "verbose" setting argument is recommended for troubleshooting, though can quickly stretch available resources on limited hardware storage.</span>
                 </div>
             </div>-->
-            <div class="control-group" >
-                <label class="control-label" for="gapless-mp3-playback">Gapless mp3 playback</label>
-                <div class="controls">
-					<select id="gapless-mp3-playback" name="conf[gapless_mp3_playback]" class="input-large">
-					
-					$_mpd_select[gapless_mp3_playback]
-					
-					</select>
+          
 
-                    <span class="help-block">If you have a problem with your MP3s ending abruptly it is recommended that you set this argument to "no" to attempt to fix the problem. </span>
-                </div>
-            </div>
 
-			<div class="control-group" >
-                <label class="control-label" for="dop">DSD over PCM</label>
-                <div class="controls">
-					<select id="dop" name="conf[dop]" class="input-large">
-					
-					$_mpd_select[dop]
-					
-					</select>
 
-                    <span class="help-block">Enable DSD over PCM, disabling direct DSD playback. Enable this only if DSD Playback doesn't work for you.</span>
-                </div>
-            </div>
-
-			<div class="control-group" >
-                <label class="control-label" for="dsd-usb">Volume normalization</label>
-                <div class="controls">
-					<select id="volume-normalization" name="conf[volume_normalization]" class="input-large">
-					
-					$_mpd_select[volume_normalization]
-					
-					</select>
-
-                    <span class="help-block">If yes, mpd will normalize the volume of songs as they play. The default is no</span>
-                </div>
-            </div>
 
             <div class="control-group" >
                 <label class="control-label" for="port">Audio buffer size</label>
@@ -130,19 +52,7 @@
                 </div>
             </div>
 			
-            <div class="control-group">
-                <label class="control-label" for="auto-update">Auto update</label>
-                <div class="controls">
 
-                    <select id="auto-update" name="conf[auto_update]" class="input-large">
-
-					$_mpd_select[auto_update] 
-					
-                    </select>
-	
-                    <span class="help-block">This setting enables automatic update of music database when files in music_directory are changed.</span>
-                </div>
-            </div>
             <!-- <div class="control-group">
                 <label class="control-label" for="auto-update-depth">Auto update depth</label>
                 <div class="controls">
@@ -174,54 +84,7 @@
                 </div>
             </div>
         </fieldset>-->
-		<fieldset>
-		
-            <legend>Resampling</legend>
-            <p>Here you can set Up or Downsampling. Set the desired bit-depth and resolution and the desired Resampling algorithm.</p>
-            <br>
-			<div class="control-group">
-			<label class="control-label" for="audio-output-format">Audio output format (resampling)</label>
-				<br>
-                <div class="controls">
-	
-                    <select id="audio-output-format" name="conf[audio_output_format]" class="input-large">
-					
-					$_mpd_select[audio_output_format]
-					
-                    </select>
 
-                    <span class="help-block">This setting will change all decoded audio to be converted to the specified format before being passed to the audio outputs. By default, this setting is disabled.</span>
-                </div>
-				 </div>
-            <div class="control-group">
-                <label class="control-label" for="samplerate-converter">Sample rate converter</label>
-                <div class="controls">
-	
-                    <select id="samplerate_converter" name="conf[samplerate_converter]" class="input-large">
-                        
-						$_mpd_select[samplerate_converter]
-                    </select>
-
-                    <span class="help-block">
-					<strong>Best Sinc Interpolator:</strong> Band limited sinc interpolation, best quality, 97dB SNR, 96% BW.<br>
-					<strong>Medium Sinc Interpolator:</strong> Band limited sinc interpolation, medium quality, 97dB SNR, 90% BW.<br>
-					<strong>Fastest Sinc Interpolator:</strong> Band limited sinc interpolation, fastest, 97dB SNR, 80% BW.<br>
-
-					Best Sinc Interpolator provides the best quality playback but it's the most resource intensive, so if you experience drop-offs or clicks, just try the medium or fastest sinc interpolators.
-
-</span>
-					
-                </div>
-            </div> 
-        </fieldset>
-		<div class="form-actions">
-            <button type="button" class="btn btn-large">Cancel</button>
-            <button type="submit" class="btn btn-primary btn-large" name="save" value="save">Save changes</button>
-        </div>
-
-
-			
-            
         
     </form>
 </div>
