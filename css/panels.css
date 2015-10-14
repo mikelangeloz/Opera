@@ -3,7 +3,7 @@
 
 html, body {
 	height: 100%;
-	background: #525C66;
+	background: #000000;
 	color: #eee;
 }
 
@@ -70,7 +70,7 @@ html, body {
 #currentsong {
 	font-size: 30px;
 	font-weight: bold;
-	color: #4BBE87;
+	color: #942531;
 }
 #playlist-position, #format-bitrate {
 	color: #8FA7BF;
@@ -159,7 +159,7 @@ html, body {
 	right: 0;
 	height: 40px;
 	line-height: 40px;
-	background: #7A848E;
+	background: #243743;
 	color: #fff;
 	z-index: 1000;
 }
@@ -206,7 +206,7 @@ html, body {
     line-height: 40px;
     margin: 0;
 	padding: 0 10px;
-	background: #7A848E;
+	background: #333333;
 	border-bottom: 0px solid #000;
 }
 #context-menus .dropdown-menu > li > a {
@@ -222,7 +222,7 @@ html, body {
 #menu-top .dropdown-menu > li.active > a,
 #context-menus .dropdown-menu > li > a:hover,
 #context-menus .dropdown-menu > li.active > a {
-	background: #4BBE87;
+	background: #942531;
 }
 #menu-top a, #context-menus .dropdown-menu a {
 	font-size: 16px;
@@ -267,7 +267,7 @@ html, body {
 	padding: 0;
 }
 #menu-bottom li.active a {
-	background: #4BBE87;
+	background: #942531;
 }
 #menu-bottom a {
 	display: block;
@@ -276,7 +276,7 @@ html, body {
 	line-height: 40px;
 	margin: 0;
 	padding: 0;
-	background: #7A848E;
+	background: #243743;
 	font-size: 16px;
 	text-decoration: none;
 	text-align: center;
@@ -300,7 +300,7 @@ html, body {
 	padding: 40px 0;
 }
 #timeknob, #timeflow {
-	background-color: #525C66;
+	background-color: #000000;
 }
 #timeknob.pulse, #timeflow.pulse {
 	box-shadow: 0 0 0 0 rgba(255,255,255,0.3);
@@ -320,7 +320,7 @@ a.btn-cmd {
 
 #playlist, #database {
 	padding: 80px 0;
-	background: #525C66;
+	background: #000000;
 }
 .playlist, .database {
 	display: block;
@@ -334,7 +334,7 @@ a.btn-cmd {
 	position: relative;
 	height: 49px;
 	margin: 0;
-	background: #525C66;
+	background: #000000;
 	border-bottom: 1px solid #fff;
 	color: #ddd;
 	cursor: pointer;
@@ -361,7 +361,7 @@ a.btn-cmd {
 }
 .playlist .active, .database .active { /* era: .playlist li.active, .database li.active */
 	color: #fff;
-	background: #4BBE87;
+	background: #942531;
 }
 .playlist .active span, .database .active span { /* era: .playlist li.active span, .database li.active span */
 	color: #34495E;
@@ -437,7 +437,7 @@ a.btn-cmd {
 	width: auto;
 	height: 40px;
 	padding: 0;
-	background: #525C66;
+	background: #333333;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
@@ -1131,3 +1131,20 @@ body { background: #cf0; } */
 #lib-content .tab-content {
     height: 100%;
 }
+
+.alert-info{background-color: #666666;border-color: #333333;color: #300000;}
+.alert.alert-info {
+	color: #eee;
+}
+
+.alert{text-shadow: 0 0px 0 rgba(255, 255, 255, 0.5);
+
+.form-actions {
+	border-top: 1px solid #243743;
+}
+
+.toggle .toggle-radio {
+	background: url("../images/toggle/icon-on.png") right top no-repeat;
+	color: #942531;
+
+a{color: white;text-decoration:none;}

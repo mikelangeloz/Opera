@@ -28,7 +28,7 @@ body {
   font: 14px/1.231 "Lato", sans-serif; }
 
 a {
-  color: #4BBE87;
+  color: white;
   text-decoration: underline;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
@@ -36,7 +36,7 @@ a {
   transition: 0.25s;
   -webkit-backface-visibility: hidden; }
   a:hover {
-    color: #2ecc71;
+    color: #white;
     text-decoration: none; }
 
 h1 {
@@ -71,7 +71,7 @@ h6 {
 
 .btn {
   border: none;
-  background: #7A848E;
+  background: #333333;
   color: white;
   font-size: 16.5px;
   text-decoration: none;
@@ -85,7 +85,7 @@ h6 {
   transition: 0.25s;
   -webkit-backface-visibility: hidden; }
   .btn:hover, .btn:focus {
-    background-color: #4e6d8d;
+    background-color: #7A848E;
     color: white;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
@@ -105,11 +105,11 @@ h6 {
     padding-bottom: 12px;
     padding-top: 13px; }
   .btn.btn-primary {
-    background-color: #4BBE87; }
+    background-color: #942531; }
     .btn.btn-primary:hover, .btn.btn-primary:focus {
-      background-color: #2fe2bf; }
+      background-color: #942531; }
     .btn.btn-primary:active, .btn.btn-primary.active {
-      background-color: #16a085; }
+      background-color: #942531; }
   .btn.btn-info {
     background-color: #3498db; }
     .btn.btn-info:hover, .btn.btn-info:focus {
@@ -1033,7 +1033,7 @@ textarea,
         left: -120%; }
   .toggle .toggle-radio {
     background: url("../images/toggle/icon-on.png") right top no-repeat;
-    color: #4BBE87;
+    color: #942531;
     display: block;
     font-weight: 700;
     height: 21px;
