@@ -164,6 +164,10 @@ html, body {
 	z-index: 1000;
 }
 #menu-top {
+	background:
+	-webkit-gradient(linear, 0% 0%, 0% 70%, from(#525C66), to(#243743));
+	background: -moz-linear-gradient(top, #525C66, #243743);
+	background: -webkit-linear-gradient(top, #525C66, #243743);
 	top: 0;
 }
 #menu-top .home {
@@ -1149,3 +1153,7 @@ body { background: #cf0; } */
 
 a{color: white;text-decoration:none;}
 
+div#menu-top {
+	background:
+	-webkit-gradient(linear, 0% 0%, 0% 70%, from(#525C66), to(#243743));
+}

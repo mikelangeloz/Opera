@@ -231,10 +231,10 @@
     padding: 10px 12px 9px;
 }
 .btn-group.open.bootstrap-select .btn.dropdown-toggle {
-    background-color: #4C6A89;
+    background-color: #942531;
 }
 .bootstrap-select .dropdown-menu {
-    background-color: #4C6A89;
+    background-color: #942531;
 	color: #fff;
 	text-decoration: none;
 }
@@ -245,6 +245,6 @@
 }
 .bootstrap-select .dropdown-menu > li > a:hover,
 .bootstrap-select .dropdown-menu > li > a:focus {
-    background: #1ABC9C;
+    background: #b94a48;
 	text-decoration: none;
 }
