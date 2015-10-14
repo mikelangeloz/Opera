@@ -81,3 +81,7 @@ width: 100%;
 display: block;
 margin: 0 auto;
 }
+.customsuccess div.ui-pnotify-container {
+	background-image: none;
+	background-color: #7A848E;
+}

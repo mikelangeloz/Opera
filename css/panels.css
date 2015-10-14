@@ -703,7 +703,7 @@ ul.parsley-error-list li {
 -------------------------------------------------------------- */
 
 .ui-pnotify .alert {
-	background: #4BBE87;
+	background: #7A848E;
 	border: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -1148,3 +1148,4 @@ body { background: #cf0; } */
 	color: #942531;
 
 a{color: white;text-decoration:none;}
+
