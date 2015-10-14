@@ -16,15 +16,69 @@ var setFolder=function(newFolder)
 *	This method searches for the album art, downloads it if needed
 *	and returns its file path. The return value is a promise 
 **/
-var processRequest=function (artist, album,resolution) {
+var processRequest=function (web,path) {
  	var defer=Q.defer();
-	
-	var decodedArtist=nodetools.urlDecode(S(artist).decodeHTMLEntities().s);
-	var decodedAlbum=nodetools.urlDecode(S(album).decodeHTMLEntities().s);
-	var decodedResolution=nodetools.urlDecode(S(resolution).decodeHTMLEntities().s);
-	
-	var folder=albumArtRootFolder+decodedArtist+'/'+decodedAlbum+'/';
-	var fileName=decodedResolution;
+
+	if(web==undefined && path==undefined)
+	{
+		defer.reject(new Error(''));
+		return defer.promise;
+	}
+
+
+	if(path!=undefined)
+	{
+		/**
+		 * Trying to read albumart from file
+		 */
+
+		if(fs.existsSync(path))
+		{
+			defer.resolve(path);
+			return defer.promise;
+		}
+	}
+
+	/**
+	 * If we arrive to this point the file albumart has not been passed or doesn't exists
+	 */
+
+	var artist,album,resolution;
+
+	if(web!=undefined)
+	{
+		var splitted=nodetools.urlDecode(web).split('/');
+
+		if(splitted.length<3)
+		{
+			defer.reject(new Error('The web link '+web+' is malformed' ));
+			return defer.promise;
+		}
+
+		if(splitted.length==3)
+		{
+			artist=splitted[0];
+			album=splitted[1];
+			resolution=splitted[2];
+		}
+		else if(splitted.length==4)
+		{
+			artist=splitted[1];
+			album=splitted[2];
+			resolution=splitted[3];
+		}
+	}
+	else
+	{
+		defer.reject(new Error('No parameters defined'));
+		return defer.promise;
+	}
+
+	/**
+	 * Loading album art from network
+	 */
+	var folder=albumArtRootFolder+artist+'/'+album+'/';
+	var fileName=resolution;
 	
 	fs.ensureDirSync(folder);
 	var infoPath=folder+'info.json';
@@ -56,22 +110,28 @@ var processRequest=function (artist, album,resolution) {
 					}
 					else
 					{
-						var splitted=url.split('.');
-						var fileExtension=splitted[splitted.length-1];
-						var diskFileName=uuid.v4()+'.'+fileExtension;
+						if(url!=undefined && url!='')
+						{
+							var splitted=url.split('.');
+							var fileExtension=splitted[splitted.length-1];
+							var diskFileName=uuid.v4()+'.'+fileExtension;
 
-						var options = {
-							directory: folder,
-							filename: diskFileName
+							var options = {
+								directory: folder,
+								filename: diskFileName
+							}
+
+							console.log("URL: "+url);
+							download(url, options, function(err){
+								if (err) defer.reject(new Error(err));
+								else defer.resolve(folder+diskFileName);
+							});
+
+							infoJson[resolution]=diskFileName;
 						}
-
-						download(url, options, function(err){
-							if (err) defer.reject(new Error(err));
-							else defer.resolve(folder+diskFileName);
-						});
-
-						infoJson[resolution]=diskFileName;
-
+						else{
+							defer.reject(new Error('No albumart URL'));
+						}
 					}
 
 					fs.writeJsonSync(infoPath,infoJson);
@@ -88,11 +148,17 @@ var processRequest=function (artist, album,resolution) {
 					filename: diskFileName
 				}
 
-				download(url, options, function(err){
-					if (err) defer.reject(new Error(err));
-					else defer.resolve(folder+diskFileName);
-				});
-				
+				if(url!=undefined && url!='')
+				{
+					download(url, options, function(err){
+						if (err) defer.reject(new Error(err));
+						else defer.resolve(folder+diskFileName);
+					});
+				}
+				else{
+					defer.reject(new Error('No albumart URL'));
+				}
+
 				infoJson[resolution]=diskFileName;
 
 			}
@@ -120,7 +186,11 @@ var processRequest=function (artist, album,resolution) {
 *	To achieve this assign this function to a path like /:artist/:album/:resolution
 **/
 var processExpressRequest=function (req, res) {
-  var promise=processRequest(req.params.artist,req.params.album,req.params.resolution);
+	var web=req.query.web;
+	var path=req.query.path;
+
+
+  var promise=processRequest(web,path);
   promise.then(function(filePath){
 	  console.log('Sending file '+filePath);
   		res.sendFile(filePath);

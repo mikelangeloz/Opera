@@ -79,10 +79,15 @@ if (!$mpd) {
 			$status['currentsong'] = $curTrack[0]['Title'];
 			$status['currentalbum'] = $curTrack[0]['Album'];
 			$status['fileext'] = parseFileStr($curTrack[0]['file'],'.');
+			$string = $curTrack[0]['file'];
+			$plorp = substr(strrchr($string,'/'), 1);
+            $asd = substr($string, 0, - strlen($plorp));
 			$status['currentalbumart'] = '<img src="';
 			$status['currentalbumart'] .= 'http://';
 			$status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
-			$status['currentalbumart'] .= ':3001/';
+			$status['currentalbumart'] .= ':3001/albumart?path=';
+			$status['currentalbumart'] .= $asd;
+			$status['currentalbumart'] .= '&web=';
 			$status['currentalbumart'] .= $curTrack[0]['Artist'];
 			$status['currentalbumart'] .= '/';
 			$status['currentalbumart'] .= $curTrack[0]['Album'];

@@ -1,10 +1,10 @@
 var libQ = require('kew');
 var libFast = require('fast.js');
 var fs=require('fs-extra');
-var exec = require('child_process').exec
+var exec = require('child_process').exec;
 var nodetools=require('nodetools');
 var ip = require('ip');
-var ifconfig = require('wireless-tools/ifconfig');
+var S=require('string');
 
 // Define the AlbumArt class
 module.exports = AlbumArt;
@@ -18,12 +18,10 @@ function AlbumArt(context) {
 
 }
 
-
+AlbumArt.prototype.onVolumioStart = function() {
 	var self = this;
 
-	//self.config= new (require('v-conf'))();
-	//var configFile=self.commandRouter.pluginManager.getConfigurationFile(self.context,'config.json');
-	//self.config.loadFile(configFile);
+
 
 	//Starting server
 	exec('/usr/local/bin/node '+__dirname+'/serverStartup.js 3001 /data/albumart',
@@ -35,7 +33,7 @@ function AlbumArt(context) {
 			else console.log('Album art server started up');
 
 		});
-
+}
 
 AlbumArt.prototype.onStart = function() {
 	var self = this;
@@ -69,38 +67,4 @@ AlbumArt.prototype.getConfigurationFiles = function()
 	var self = this;
 
 	return ['config.json'];
-}
-
-AlbumArt.prototype.getAlbumart=function(data)
-{
-	var self=this;
-
-	var defer=libQ.defer();
-
-	ifconfig.status('wlan0', function(err, status) {
-		var address;
-
-		if (status != undefined) {
-			if (status.ipv4_address != undefined) {
-				address = status.ipv4_address;
-			}
-			else address = ip.address();
-		}
-		else address= ip.address();
-
-		var url;
-		var artist,album;
-
-		artist=data.artist;
-		if(data.album!=undefined)
-			album=data.album;
-		else album=data.artist;
-
-		var url='http://'+address+':3001/'+nodetools.urlEncode(artist)+'/'+nodetools.urlEncode(album)+'/extralarge';
-
-		defer.resolve(url);
-	});
-
-
-	return defer.promise;
 }
