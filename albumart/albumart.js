@@ -25,19 +25,45 @@ var processRequest=function (web,path) {
 		return defer.promise;
 	}
 
-
+	console.log(path);
 	if(path!=undefined)
 	{
 		/**
 		 * Trying to read albumart from file
 		 */
 
-		if(fs.existsSync(path))
+		var covers=['coverart.jpg','albumart.jpg','coverart.png','albumart.png',
+					'cover.jpg' , 'Cover.jpg' , 'folder.jpg','Folder.jpg',
+					'cover.png' , 'Cover.png' , 'folder.png','Folder.png'];
+		var splitted=path.split('/');
+
+
+		for(var i in covers)
 		{
-			defer.resolve(path);
-			return defer.promise;
+			var coverFile=path+'/'+covers[i];
+			console.log("Searching for cover "+coverFile);
+			if(fs.existsSync(coverFile))
+			{
+				defer.resolve(coverFile);
+				return defer.promise;
+			}
 		}
+
+		var files=fs.readdirSync(path);
+		for(var j in files) {
+			var fileName=S(files[j]);
+
+			console.log(fileName.s);
+			if(fileName.endsWith('.png') || fileName.endsWith('.jpg')) {
+				defer.resolve(path+'/'+fileName.s);
+				return defer.promise;
+			}
+
+		}
+
+
 	}
+
 
 	/**
 	 * If we arrive to this point the file albumart has not been passed or doesn't exists
@@ -107,6 +133,7 @@ var processRequest=function (web,path) {
 					{
 						console.log("ERRORE: "+err);
 						defer.reject(new Error(err));
+						return defer.promise;
 					}
 					else
 					{
@@ -131,6 +158,7 @@ var processRequest=function (web,path) {
 						}
 						else{
 							defer.reject(new Error('No albumart URL'));
+							return defer.promise;
 						}
 					}
 
@@ -139,17 +167,16 @@ var processRequest=function (web,path) {
 			}
 			else
 			{
-				var splitted=url.split('.');
-				var fileExtension=splitted[splitted.length-1];
-				var diskFileName=uuid.v4()+'.'+fileExtension;
-				
-				var options = {
-					directory: folder,
-					filename: diskFileName
-				}
-
 				if(url!=undefined && url!='')
 				{
+					var splitted=url.split('.');
+					var fileExtension=splitted[splitted.length-1];
+					var diskFileName=uuid.v4()+'.'+fileExtension;
+
+					var options = {
+						directory: folder,
+						filename: diskFileName
+					}
 					download(url, options, function(err){
 						if (err) defer.reject(new Error(err));
 						else defer.resolve(folder+diskFileName);
@@ -157,6 +184,7 @@ var processRequest=function (web,path) {
 				}
 				else{
 					defer.reject(new Error('No albumart URL'));
+					return defer.promise;
 				}
 
 				infoJson[resolution]=diskFileName;

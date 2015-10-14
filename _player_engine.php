@@ -85,13 +85,13 @@ if (!$mpd) {
 			$status['currentalbumart'] = '<img src="';
 			$status['currentalbumart'] .= 'http://';
 			$status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
-			$status['currentalbumart'] .= ':3001/albumart?path=';
-			$status['currentalbumart'] .= $asd;
-			$status['currentalbumart'] .= '&web=';
+			$status['currentalbumart'] .= ':3001/albumart?web=';
 			$status['currentalbumart'] .= $curTrack[0]['Artist'];
 			$status['currentalbumart'] .= '/';
 			$status['currentalbumart'] .= $curTrack[0]['Album'];
-			$status['currentalbumart'] .= '/extralarge">';
+			$status['currentalbumart'] .= '/extralarge&path=/mnt/';
+			$status['currentalbumart'] .= $asd;
+			$status['currentalbumart'] .= '">';
 
 
 		} else {

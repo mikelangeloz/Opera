@@ -21,10 +21,12 @@ function AlbumArt(context) {
 AlbumArt.prototype.onVolumioStart = function() {
 	var self = this;
 
-
+	self.config= new (require('v-conf'))();
+	var configFile=self.commandRouter.pluginManager.getConfigurationFile(self.context,'config.json');
+	self.config.loadFile(configFile);
 
 	//Starting server
-	exec('/usr/local/bin/node '+__dirname+'/serverStartup.js 3001 /data/albumart',
+	exec('/usr/local/bin/node '+__dirname+'/serverStartup.js '+self.config.get('port')+' '+self.config.get('folder'),
 		function (error, stdout, stderr) {
 
 			if (error !== null) {
