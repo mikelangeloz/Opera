@@ -49,7 +49,7 @@ killall -9 atd
 killall -9 startpar
 #Automatic unmuting
 sh /home/volumio/unmute.sh
-/usr/local/bin/node /var/www/albumart/serverStartup.js 3001 /data/albumart
+/usr/local/bin/node /var/www/albumart/albumart.js
 
 
 echo "flush startup settings"
