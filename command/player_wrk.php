@@ -248,26 +248,9 @@ $_SESSION['netconf']['wlan0']['ip'] = $ip_wlan0[0];
 
 //start minidlna only if selected by user
 if (isset($_SESSION['minidlna']) && $_SESSION['minidlna'] == 1) {
-// Copy /etc/minidlna.conf to /run/minidlna.conf
-copy('/etc/minidlna.conf', '/run/minidlna.conf');
-// minidlna.conf
-$file = '/run/minidlna.conf';
-$fileData = file($file);
-$newArray = array();
-foreach($fileData as $line) {
-  // find the line that starts with 'presentation_url"
-  if (substr($line, 0, 16) == 'presentation_url' OR substr($line, 1, 16) == 'presentation_url') {
-	// replace presentation_url with current IP address
-	$line = "presentation_url=http://".$ip.":80\n";
-  }
-  $newArray[] = $line;
-}
-// Commit changes to /run/minidlna.conf
-$fp = fopen($file, 'w');
-fwrite($fp, implode("",$newArray));
-fclose($fp);
+
 // Start minidlna service
-sysCmd('/usr/bin/minidlna -f /run/minidlna.conf');
+sysCmd(' /usr/local/sbin/minidlnad -f /etc/minidlna.conf');
 }
 // check /etc/network/interfaces integrity
 hashCFG('check_net',$db);
