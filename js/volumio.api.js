@@ -492,8 +492,8 @@ function updateGUI(objectInputState){
 	$('#total').html(timeConvert(objectInputState['time']));
 	//$('#time').val(objectInputState['song_percent']).trigger('change');
 
-	var fileinfo = (objectInputState['audio_channels'] && objectInputState['audio_sample_depth'] && objectInputState['audio_sample_rate']) ? (objectInputState['audio_channels'] + ' - ' + objectInputState['audio_sample_depth'] + ' bit - ' + objectInputState['audio_sample_rate'] +' kHz ') : '&nbsp;';
-	$('#format-bitrate').html(fileinfo);
+	//var fileinfo = (objectInputState['audio_channels'] && objectInputState['audio_sample_depth'] && objectInputState['audio_sample_rate']) ? (objectInputState['audio_channels'] + ' - ' + objectInputState['audio_sample_depth'] + ' bit - ' + objectInputState['audio_sample_rate'] +' kHz ') : '&nbsp;';
+	//$('#format-bitrate').html(fileinfo);
 
 	$('#playlist-position').html('Playlist position ' + (parseInt(objectInputState['song']) + 1) +'/'+objectInputState['playlistlength']);
 	$('.playlist li').removeClass('active');
