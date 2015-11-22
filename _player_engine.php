@@ -85,22 +85,33 @@ if (!$mpd) {
 			$status['currentalbumart'] = '<img src="';
 			$status['currentalbumart'] .= 'http://';
 			$status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
-			$status['currentalbumart'] .= ':3001/albumart?web=';
+			$status['currentalbumart'] .= ':3001/albumart?';
+			$status['currentalbumart'] .= 'web=';
 			$status['currentalbumart'] .= $curTrack[0]['Artist'];
 			$status['currentalbumart'] .= '/';
 			$status['currentalbumart'] .= $curTrack[0]['Album'];
-			$status['currentalbumart'] .= '/extralarge&path=/mnt/';
+			$status['currentalbumart'] .= '/extralarge&';
+			$status['currentalbumart'] .= 'path=/mnt/';
 			$status['currentalbumart'] .= $asd;
 			$status['currentalbumart'] .= '">';
 
 
 		} else {
+			$string = $curTrack[0]['file'];
+            $plorp = substr(strrchr($string,'/'), 1);
+            $asd = substr($string, 0, - strlen($plorp));
 			$path = parseFileStr($curTrack[0]['file'],'/');
 			$status['fileext'] = parseFileStr($curTrack[0]['file'],'.');
 			$status['currentartist'] = "";
 			$status['currentsong'] = $song;
-			$status['currentalbum'] = "path: ".$path;
-
+			$status['currentalbum'] = $path;
+			$status['currentalbumart'] = '<img src="';
+            $status['currentalbumart'] .= 'http://';
+            $status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
+            $status['currentalbumart'] .= ':3001/albumart?';
+			$status['currentalbumart'] .= 'path=/mnt/';
+            $status['currentalbumart'] .= $asd;
+            $status['currentalbumart'] .= '">';
 		}
 
 		// CMediaFix
