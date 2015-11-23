@@ -49,7 +49,7 @@ var processRequest=function (web,path) {
 		var covers=['coverart.jpg','albumart.jpg','coverart.png','albumart.png',
 					'cover.jpg' , 'Cover.jpg' , 'folder.jpg','Folder.jpg',
 					'cover.JPG' , 'Cover.JPG' , 'folder.JPG','Folder.JPG',
-					'cover.PNG' , 'Cover.PNG' , 'folder.PNG','Folder.PNG,
+					'cover.PNG' , 'Cover.PNG' , 'folder.PNG','Folder.PNG',
 					'cover.png' , 'Cover.png' , 'folder.png','Folder.png'];
 		var splitted=path.split('/');
 
