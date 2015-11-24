@@ -52,11 +52,11 @@ var processRequest=function (web,path) {
 					'cover.PNG' , 'Cover.PNG' , 'folder.PNG','Folder.PNG',
 					'cover.png' , 'Cover.png' , 'folder.png','Folder.png'];
 		var splitted=path.split('/');
-
+		
 
 		for(var i in covers)
 		{
-			var coverFile=path+'/'+covers[i];
+			var coverFile=path+covers[i];
 			console.log("Searching for cover "+coverFile);
 			if(fs.existsSync(coverFile))
 			{
@@ -70,7 +70,7 @@ var processRequest=function (web,path) {
 			var fileName=S(files[j]);
 
 			console.log(fileName.s);
-			if(fileName.endsWith('.png') || fileName.endsWith('.jpg')) {
+			if(fileName.endsWith('.png') || fileName.endsWith('.jpg' || fileName.endsWith('.JPG') || fileName.endsWith('.PNG'))) {
 				defer.resolve(path+'/'+fileName.s);
 				return defer.promise;
 			}
