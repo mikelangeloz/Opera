@@ -57,7 +57,7 @@ var processRequest=function (web,path) {
 			var fileName=S(files[j]);
 
 			console.log(fileName.s);
-			if(fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.JPG') || fileName.endsWith('.PNG'))) {
+			if(fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.JPG') || fileName.endsWith('.PNG')) {
 				defer.resolve(path+'/'+fileName.s);
 				return defer.promise;
 			}
