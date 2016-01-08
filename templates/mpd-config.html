@@ -20,13 +20,13 @@
                         <option value="default"  >default</option>
                         <option value="secure"  >secure</option>
                         <option value="verbose" >verbose</option>
-                    </select> 
-					
+                    </select>
+
                     <span class="help-block">This setting controls the type of information which is logged. Available setting arguments are "default", "secure" or "verbose".
                     The "verbose" setting argument is recommended for troubleshooting, though can quickly stretch available resources on limited hardware storage.</span>
                 </div>
             </div>-->
-          
+
 
 
 
@@ -43,15 +43,15 @@
                 <label class="control-label" for="dsd-usb">Buffer before play</label>
                 <div class="controls">
 					<select id="buffer-before-play" name="conf[buffer_before_play]" class="input-large">
-					
+
 					$_mpd_select[buffer_before_play]
-					
+
 					</select>
 
                     <span class="help-block"> This specifies how much of the audio buffer should be filled before playing a song. Try increasing this if you hear skipping when manually changing songs. The default is 10%, a little over 1 second of CD-quality audio with the default buffer size</span>
                 </div>
             </div>
-			
+
 
             <!-- <div class="control-group">
                 <label class="control-label" for="auto-update-depth">Auto update depth</label>
@@ -61,6 +61,10 @@
                 </div>
             </div> -->
         </fieldset>
+        <div class="form-actions">
+           <button type="button" class="btn btn-large">Cancel</button>
+           <button type="submit" class="btn btn-primary btn-large" name="save" value="save">Save changes</button>
+       </div>
       <!--  <fieldset>
             <legend>Zeroconf / Avahi Service Discovery</legend>
             <div class="control-group">
@@ -68,14 +72,14 @@
                 <div class="controls">
 
                     <select id="zeroconf-enabled" name="conf[zeroconf_enabled]" class="input-large">
-   
-					$_mpd_select[zeroconf_enabled] 
-   
+
+					$_mpd_select[zeroconf_enabled]
+
                     </select>
 
                     <span class="help-block">If this setting is set to "yes", service information will be published with Zeroconf / Avahi.</span>
                 </div>
-            </div> 
+            </div>
             <div class="control-group">
                 <label class="control-label" for="zeroconf-name">Zeroconf name</label>
                 <div class="controls">
@@ -85,7 +89,7 @@
             </div>
         </fieldset>-->
 
-        
+
     </form>
 </div>
 <div id="mpd-config-defaults" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mpd-config-defaults-label" aria-hidden="true">
@@ -98,7 +102,7 @@
 				<p>You are going to reset the configuration to the default original values.<br>
 				You will lose any modification.</p>
 			</div>
-			
+
 			<div class="modal-footer">
 			<input type="hidden" name="reset" value="1">
 				<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

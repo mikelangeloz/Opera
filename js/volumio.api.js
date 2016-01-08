@@ -22,7 +22,7 @@
  *  - v1, 1.1: Simone De Gregori (aka Orion)
  *  - v2: Michelangelo Guarise
  *  - v2: Joel Takvorian
- * 
+ *
  *  file:                    volumio.api.js
  *  version:                 2
  */
@@ -216,11 +216,11 @@ function pluginListItem(id, text, faicon, onclick) {
         + text + '</div></li>';
 }
 
-function parseResponse(inputArr,respType,i,inpath) {		
+function parseResponse(inputArr,respType,i,inpath) {
 	var content = "";
 
 	switch (respType) {
-		case 'playlist':		
+		case 'playlist':
 			// code placeholder
 		break;
 
@@ -261,8 +261,16 @@ function parseResponse(inputArr,respType,i,inpath) {
 					// Strip the leading path and trailing '.pls', and display only the filename
 					content += inputArr[i].file.replace(inpath + '/', '').replace('.pls', '') + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
 					content += '</div></li>';
-					
+
 				}
+
+      } else if (inputArr[i].Type == 'MpdPlaylist') {
+        content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+        content += inputArr[i].file;
+        content += '"><div class="db-icon db-song db-browse"><i class="fa fa-bars sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-playlist"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-song db-browse">';
+        content += inputArr[i].file + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
+        content += '</div></li>';
+      showtype = 'playlist'
 
 			} else if (inputArr[i].Type == 'MpdDirectory') {
 			// This is a MPD folder
@@ -291,10 +299,10 @@ function parseResponse(inputArr,respType,i,inpath) {
 					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-spinner icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
 				}
- 
+
 				if (inputArr[i].DisplayName) {
 				// If a DisplayName is available for this entry, use it
-					content += inputArr[i].DisplayName;
+					//content += inputArr[i].DisplayName;
 
 				} else {
 				// Else strip the leading path and slash, and display the folder name
@@ -359,10 +367,10 @@ content += '"><div class="db-icon db-spop db-browse"><i class="fa fa-spotify sx 
 
 				content += '</div></li>';
 
-			}	
+			}
 
 		break;
-		
+
 	}
 
 	return content;
@@ -390,7 +398,12 @@ function getDB(cmd, path, browsemode, uplevel){
 		$.post('db/?cmd=update', { 'path': path }, function(path) {
 		}, 'json');
 
-	} else if (cmd == 'search') {
+  } else if (cmd == 'delplaylist') {
+    console.log(path);
+  $.post('db/?cmd=delplaylist', { 'path': path }, function(path) {
+  }, 'json');
+
+  } else if (cmd == 'search') {
 		var keyword = $('#db-search-keyword').val();
 		$.post('db/?querytype=' + browsemode + '&cmd=search', { 'query': keyword }, function(data) {
 			populateDB(data, path, uplevel, keyword);

@@ -21,7 +21,7 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							db/index.php
  * version:						1.0
  *
@@ -35,10 +35,10 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 
         if ( !$mpd ) {
         echo 'Error Connecting to MPD daemon ';
-		
+
 		}  else {
 				switch ($_GET['cmd']) {
-				
+
 				case 'filepath':
 					if (isset($_POST['path']) && $_POST['path'] != '') {
 						if ($spop && strcmp(substr($_POST['path'],0,7),"SPOTIFY") == 0) {
@@ -75,7 +75,7 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 						echo json_encode(addQueue($mpd,$_POST['path']));
 					}
 					break;
-				
+
 				case 'addplay':
 					if (isset($_POST['path']) && $_POST['path'] != '') {
 						$status = _parseStatusResponse(MpdStatus($mpd));
@@ -94,14 +94,21 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 						echo json_encode(readMpdResponse($mpd));
 					}
 					break;
-				
+
 				case 'update':
 					if (isset($_POST['path']) && $_POST['path'] != '') {
 						sendMpdCommand($mpd,"update \"".html_entity_decode($_POST['path'])."\"");
 						echo json_encode(readMpdResponse($mpd));
 					}
 					break;
-				
+
+          case 'delplaylist':
+  					if (isset($_POST['path']) && $_POST['path'] != '') {
+  						sendMpdCommand($mpd,"rm \"".html_entity_decode($_POST['path'])."\"");
+  						echo json_encode(readMpdResponse($mpd));
+  					}
+  					break;
+
 				case 'trackremove':
 					if (isset($_GET['songid']) && $_GET['songid'] != '') {
 						echo json_encode(remTrackQueue($mpd,$_GET['songid']));
@@ -115,7 +122,7 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 						echo json_encode(readMpdResponse($mpd));
 					}
 					break;
-				
+
 				case 'search':
 					if (isset($_POST['query']) && $_POST['query'] != '' && isset($_GET['querytype']) && $_GET['querytype'] != '') {
 						$arraySearchResults = searchDB($mpd,$_GET['querytype'],$_POST['query']);
@@ -198,4 +205,3 @@ if ($spop) {
 }
 
 ?>
-

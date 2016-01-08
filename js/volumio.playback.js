@@ -22,7 +22,7 @@
  *  - v1, 1.1: Simone De Gregori (aka Orion)
  *  - v2: Michelangelo Guarise
  *  - v2: Joel Takvorian
- * 
+ *
  *  file:                    volumio.playback.js
  *  version:                 2
  */
@@ -380,7 +380,7 @@ jQuery(document).ready(function($){ 'use strict';
             }
         }
     });
-	// Double-click play 
+	// Double-click play
     $('.database').on('dblclick', '.db-song', function() {
         $('.database li').removeClass('active');
         $(this).parent().addClass('active');
@@ -390,7 +390,7 @@ jQuery(document).ready(function($){ 'use strict';
         getDB('addplay', path);
         notify('add', path);
     });
-    
+
     $('.database').on('dblclick', '.db-spop', function() {
         $('.database li').removeClass('active');
         $(this).parent().addClass('active');
@@ -398,8 +398,8 @@ jQuery(document).ready(function($){ 'use strict';
         //console.log('doubleclicked path = ', path);
         $.post('db/?cmd=spop-playtrackuri', { 'path': path }, function(data) {}, 'json');
         notify('add', path);
-    }); 
-    
+    });
+
     $('.database').on('dblclick', '.db-other', function() {
         $('.database li').removeClass('active');
         $(this).parent().addClass('active');
@@ -489,6 +489,10 @@ jQuery(document).ready(function($){ 'use strict';
         if ($(this).data('cmd') == 'spop-stop') {
 			$.post('db/?cmd=spop-stop', {}, function(data) {}, 'json');
 
+        }
+        if ($(this).data('cmd') == 'delplaylist') {
+            getDB('delplaylist', path);
+            notify('delplaylist', path);
         }
     });
 
@@ -619,4 +623,3 @@ jQuery(document).ready(function($){ 'use strict';
         }
     }
 })();
-

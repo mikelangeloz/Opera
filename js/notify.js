@@ -18,7 +18,7 @@ function notify(command, msg) {
 				opacity: .9
 			});
 		break;
-		
+
 		case 'update':
 			$.pnotify({
 				title: 'Update path: ',
@@ -27,7 +27,16 @@ function notify(command, msg) {
 				opacity: .9
 			});
 		break;
-		
+
+		case 'delplaylist':
+			$.pnotify({
+				title: 'Playlist Deleted',
+				text: msg,
+				icon: 'fa fa-remove',
+				opacity: .9
+			});
+		break;
+
 		case 'remove':
 			$.pnotify({
 				title: 'Removed from playlist',

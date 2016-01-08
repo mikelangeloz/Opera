@@ -10,7 +10,7 @@
 			<span id="format-bitrate"></span>
 
 			<div class="row-fluid">
-			
+
 				<div class="span4">
 					<div id="timeknob">
 						<div id="countdown" ms-user-select="none">
@@ -24,7 +24,7 @@
 							<a id="repeat" class="btn btn-cmd btn-toggle" href="#notarget" title="Repeat"><i class="fa fa-repeat"></i></a>
 							<a id="random" class="btn btn-cmd btn-toggle" href="#notarget" title="Random"><i class="fa fa-random"></i></a>
 							<a id="single" class="btn btn-cmd btn-toggle" href="#notarget" title="Single"><i class="fa fa-refresh"></i></a>
-							<a id="consume" class="btn btn-cmd btn-toggle" href="#notarget" title="Consume Mode"><i class="fa fa-trash"></i></a>			
+							<a id="consume" class="btn btn-cmd btn-toggle" href="#notarget" title="Consume Mode"><i class="fa fa-trash"></i></a>
 						</div>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- -------------------- DATABASE PANEL -------------------- -->
 	<div id="panel-sx" class="tab-pane">
 		<div class="btnlist btnlist-top">
@@ -57,7 +57,7 @@
 			</form>
 			<div id="db-back">
 				<button class="btn"><i class="fa fa-arrow-left sx"></i> <em id="db-back-text">back</em></button>
-			
+
 			<span id="webradio-add">
 				<a href="#webradio-modal" data-toggle="modal" title="Add New WebRadio"><button class="btn"><i class="fa fa-plus"></i><em id="webradio-add-text"></em></button></a>
 			</span>
@@ -77,9 +77,9 @@
 			<div id="db-currentpath">
 				<i class="fa fa-folder-open"></i> <span>NAS/</span>
 			</div>
-		</div>		
+		</div>
 	</div>
-	
+
 	<!-- -------------------- PLAYLIST PANEL -------------------- -->
 	<div id="panel-dx" class="tab-pane">
 		<div class="btnlist btnlist-top">
@@ -97,7 +97,7 @@
 			</ul>
 		</div>
 		<div class="btnlist btnlist-bottom">
-		
+
 			<div id="pl-controls">
 				<form id="pl-save" method="post" onSubmit="return false;">
                                 	<div class="input-append">
@@ -109,7 +109,7 @@
 				<button class="btn pl-firstPage"><i class="fa fa-angle-double-up"></i></button>
 				<button class="btn pl-lastPage"><i class="fa fa-angle-double-down"></i></button>
 			</div>
-			<form id="clearqueue" method="post">	
+			<form id="clearqueue" method="post">
 			<input class="btn" type="submit" name="syscmd" value="Clear Queue" id="syscmd-clearqueue">
 			</form>
 		</div>
@@ -156,6 +156,13 @@
 			<li><a href="#notarget" data-cmd="addplay"><i class="fa fa-play sx"></i> Add and play</a></li>
 			<li><a href="#notarget" data-cmd="addreplaceplay"><i class="fa fa-share sx"></i> Add, replace and play</a></li>
 			<li><a href="#notarget" data-cmd="update"><i class="fa fa-refresh sx"></i> Update this folder</a></li>
+		</ul>
+	</div>
+	<div id="context-menu-playlist" class="context-menu">
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#notarget" data-cmd="addplay"><i class="fa fa-play sx"></i> Add and play</a></li>
+			<li><a href="#notarget" data-cmd="addreplaceplay"><i class="fa fa-share sx"></i> Add, replace and play</a></li>
+			<li><a href="#notarget" data-cmd="delplaylist"><i class="fa fa-times sx"></i> Delete Playlist </a></li>
 		</ul>
 	</div>
 	<div id="context-menu-root" class="context-menu">
