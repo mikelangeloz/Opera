@@ -5,6 +5,7 @@ var S=require('string');
 var fs=require('fs-extra');
 var uuid = require('node-uuid');
 var nodetools=require('nodetools');
+var entities = require("entities");
 
 
 var albumArtRootFolder='/data/albumart';
@@ -15,11 +16,11 @@ var setFolder=function(newFolder)
 }
 /**
 *	This method searches for the album art, downloads it if needed
-*	and returns its file path. The return value is a promise 
+*	and returns its file path. The return value is a promise
 **/
-var processRequest=function (web,path) {
+var processRequest=function (web,pathenc) {
  	var defer=Q.defer();
-
+	var path = entities.decodeHTML(pathenc);
 	if(web==undefined && path==undefined)
 	{
 		defer.reject(new Error(''));
@@ -39,7 +40,7 @@ var processRequest=function (web,path) {
 					'cover.PNG' , 'Cover.PNG' , 'folder.PNG','Folder.PNG',
 					'cover.png' , 'Cover.png' , 'folder.png','Folder.png'];
 		var splitted=path.split('/');
-		
+
 
 		for(var i in covers)
 		{
@@ -108,12 +109,12 @@ var processRequest=function (web,path) {
 	 */
 	var folder=albumArtRootFolder+artist+'/'+album+'/';
 	var fileName=resolution;
-	
+
 	fs.ensureDirSync(folder);
 	var infoPath=folder+'info.json';
 
 	var infoJson={};
-	
+
 	if(fs.existsSync(infoPath)==false)
 	{
 		fs.ensureFileSync(infoPath);
@@ -125,7 +126,7 @@ var processRequest=function (web,path) {
 
 	if(fileSizeInBytes>0)
 	    infoJson = fs.readJsonSync(infoPath, {throws: false})
-	
+
 	if(infoJson[resolution]==undefined)
 	{
 		albumart(artist, album, resolution, function (err, url) {
@@ -201,14 +202,14 @@ var processRequest=function (web,path) {
 	{
 		defer.resolve(folder+infoJson[resolution]);
 	}
-	
-	
-  return defer.promise; 
+
+
+  return defer.promise;
 }
 
 
 /**
-*	This method processes incoming request from express. 
+*	This method processes incoming request from express.
 *	The following variables are needed to be in req.params
 *   artist
 *	album

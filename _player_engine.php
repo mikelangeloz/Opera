@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *      PlayerUI Copyright (C) 2013 Andrea Coiutti & Simone De Gregori
  *		 Tsunamp Team
@@ -21,14 +21,14 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							player_engine.php
  * version:						1.0
  *
  */
- 
+
 include('inc/connection.php');
-playerSession('open',$db,'',''); 
+playerSession('open',$db,'','');
 
 if (!$mpd) {
     	echo 'Error Connecting MPD Daemon';
@@ -42,7 +42,7 @@ if (!$mpd) {
 			$_SESSION['lastbitdepth'] = $status['audio'];
 
 		}
-		
+
 		// check for Ramplay
 		if (isset($_SESSION['ramplay']) && $_SESSION['ramplay'] == 1) {
 			// record "lastsongid" in PHP SESSION
@@ -53,7 +53,7 @@ if (!$mpd) {
 				// rp_deleteFile($_SESSION['lastsongid'],$mpd);
 				// }
 			// recupero id nextsong e metto in sessione
-			$_SESSION['nextsongid'] = $status['nextsongid']; 
+			$_SESSION['nextsongid'] = $status['nextsongid'];
 
 		}
 
@@ -69,7 +69,7 @@ if (!$mpd) {
 			// Wait until the status changes and then return new status
 			$status = monitorMpdState($mpd);
 
-		} 
+		}
 		// -----  check and compare GUI state with Backend state  ----  //
 
 		$curTrack = getTrackInfo($mpd,$status['song']);
@@ -92,7 +92,7 @@ if (!$mpd) {
 			$status['currentalbumart'] .= $curTrack[0]['Album'];
 			$status['currentalbumart'] .= '/extralarge&';
 			$status['currentalbumart'] .= 'path=/mnt/';
-			$status['currentalbumart'] .= $asd;
+			$status['currentalbumart'] .= htmlentities($asd);
 			$status['currentalbumart'] .= '">';
 
 
@@ -110,7 +110,7 @@ if (!$mpd) {
             $status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
             $status['currentalbumart'] .= ':3001/albumart?';
 			$status['currentalbumart'] .= 'path=/mnt/';
-            $status['currentalbumart'] .= $asd;
+            $status['currentalbumart'] .= htmlentities($asd);
             $status['currentalbumart'] .= '">';
 		}
 
@@ -124,7 +124,7 @@ if (!$mpd) {
 			}
 
 		}
-		
+
 		// Ramplay
 		if (isset($_SESSION['ramplay']) && $_SESSION['ramplay'] == 1) {
 				// set consume mode ON
@@ -146,7 +146,7 @@ if (!$mpd) {
 
 		// JSON response for GUI
 		echo json_encode($status);
-		
+
 	closeMpdSocket($mpd);
 
 }

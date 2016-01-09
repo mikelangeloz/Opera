@@ -10,5 +10,8 @@
   "license": "ISC",
   "volumio_info": {
     "plugin_type": "miscellanea"
+  },
+  "dependencies": {
+    "ent": "^2.2.0"
   }
 }
