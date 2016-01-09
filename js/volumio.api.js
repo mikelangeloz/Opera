@@ -265,12 +265,24 @@ function parseResponse(inputArr,respType,i,inpath) {
 				}
 
       } else if (inputArr[i].Type == 'MpdPlaylist') {
+
+        if (inputArr[i].file.includes("/")) {
         content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
         content += inputArr[i].file;
-        content += '"><div class="db-icon db-song db-browse"><i class="fa fa-bars sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-playlist"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-song db-browse">';
+        content += '"><div class="db-icon db-song db-browse"><i class="fa fa-bars sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-song db-browse">';
         content += inputArr[i].file + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
         content += '</div></li>';
       showtype = 'playlist'
+
+    } else {
+      content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+      content += inputArr[i].file;
+      content += '"><div class="db-icon db-song db-browse"><i class="fa fa-bars sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-playlist"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-song db-browse">';
+      content += inputArr[i].file + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
+      content += '</div></li>';
+      showtype = 'playlist'
+
+    }
 
 			} else if (inputArr[i].Type == 'MpdDirectory') {
 			// This is a MPD folder
