@@ -12,6 +12,7 @@
     "plugin_type": "miscellanea"
   },
   "dependencies": {
-    "ent": "^2.2.0"
+    "ent": "^2.2.0",
+    "entities": "^1.1.1"
   }
 }
