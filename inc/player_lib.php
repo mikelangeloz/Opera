@@ -1328,6 +1328,12 @@ function wrk_mpdconf($outpath,$db) {
 	$output .= "max_connections \"20\"\n";
 	$output .= "\n";
 	$output .= "decoder {\n";
+  $output .= "\t\tplugin \"sacdiso\"\n";
+  $output .= "\t\tdstdec_threads \"4\"\n";
+  $output .= "\t\tedited_master \"true\"\n";
+  $output .= "\t\tlsbitfirst \"false\"\n";
+  $output .= "}\n";
+	$output .= "decoder {\n";
 	$output .= "\t\tplugin \"ffmpeg\"\n";
 	$output .= "\t\tenabled \"yes\"\n";
 	$output .= "}\n";
@@ -1347,7 +1353,7 @@ function wrk_mpdconf($outpath,$db) {
 	$output .= "\t\t mixer_index \t\"0\"\n";
 	//$output .= "\t\t mixer_index \t\"".$hwmixer['index']."\"\n";
 	}
-	$output .= "\t\t dop \t\"".$dop."\"\n";
+	$output .= "\t\t dop \"yes\"\n";
 	$output .= "\n}\n";
 
 // write mpd.conf file
