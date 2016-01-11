@@ -20,6 +20,7 @@ var setFolder=function(newFolder)
 **/
 var processRequest=function (web,pathenc) {
  	var defer=Q.defer();
+	console.log(pathenc);
 	var path = entities.decodeHTML(pathenc);
 	if(web==undefined && path==undefined)
 	{
@@ -39,7 +40,7 @@ var processRequest=function (web,pathenc) {
 					'cover.JPG' , 'Cover.JPG' , 'folder.JPG','Folder.JPG',
 					'cover.PNG' , 'Cover.PNG' , 'folder.PNG','Folder.PNG',
 					'cover.png' , 'Cover.png' , 'folder.png','Folder.png'];
-		var splitted=path.split('/');
+		var splitted=(path.substring(0, path.lastIndexOf("/")+1))
 
 
 		for(var i in covers)
@@ -218,8 +219,11 @@ var processRequest=function (web,pathenc) {
 *	To achieve this assign this function to a path like /:artist/:album/:resolution
 **/
 var processExpressRequest=function (req, res) {
+	console.log(req);
 	var web=req.query.web;
 	var path=req.query.path;
+
+	console.log(req.query.path);
 
 
   var promise=processRequest(web,path);

@@ -86,14 +86,15 @@ if (!$mpd) {
 			$status['currentalbumart'] .= 'http://';
 			$status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
 			$status['currentalbumart'] .= ':3001/albumart?';
-			$status['currentalbumart'] .= 'web=';
-			$status['currentalbumart'] .= $curTrack[0]['Artist'];
-			$status['currentalbumart'] .= '/';
-			$status['currentalbumart'] .= $curTrack[0]['Album'];
-			$status['currentalbumart'] .= '/extralarge&';
-			$status['currentalbumart'] .= 'path=/mnt/';
-			$status['currentalbumart'] .= htmlentities($asd);
-			$status['currentalbumart'] .= '">';
+			//$status['currentalbumart'] .= 'web=';
+			//$status['currentalbumart'] .= $curTrack[0]['Artist'];
+			//$status['currentalbumart'] .= '/';
+			//$status['currentalbumart'] .= $curTrack[0]['Album'];
+			//$status['currentalbumart'] .= '/extralarge&';
+      $status['currentalbumart'] .= 'path=';
+            $status['currentalbumart'] .= '/mnt/';
+            $status['currentalbumart'] .= urlencode($asd);
+            $status['currentalbumart'] .= '">';
 
 
 		} else {
@@ -109,8 +110,9 @@ if (!$mpd) {
             $status['currentalbumart'] .= 'http://';
             $status['currentalbumart'] .= $_SERVER['SERVER_ADDR'];
             $status['currentalbumart'] .= ':3001/albumart?';
-			$status['currentalbumart'] .= 'path=/mnt/';
-            $status['currentalbumart'] .= htmlentities($asd);
+			$status['currentalbumart'] .= 'path=';
+            $status['currentalbumart'] .= '/mnt/';
+            $status['currentalbumart'] .= urlencode($asd);
             $status['currentalbumart'] .= '">';
 		}
 
