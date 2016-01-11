@@ -20,15 +20,31 @@ var setFolder=function(newFolder)
 **/
 var processRequest=function (web,pathenc) {
  	var defer=Q.defer();
-	console.log(pathenc);
+
 	var path = entities.decodeHTML(pathenc);
+	if (path.indexOf('.iso') >= 0 ) {
+		path2 = path.substr(0, path.lastIndexOf("/"));
+		pathiso = path2.substr(0, path2.lastIndexOf("/"));
+		path = pathiso+'/';
+			console.log(path);
+	} else if (path.indexOf('.ISO') >= 0 ) {
+		path2 = path.substr(0, path.lastIndexOf("/"));
+		pathiso = path2.substr(0, path2.lastIndexOf("/"));
+		path = pathiso+'/';
+			console.log(path);
+
+	}
+	{
+		console.log(path);
+	}
+
 	if(web==undefined && path==undefined)
 	{
 		defer.reject(new Error(''));
 		return defer.promise;
 	}
 
-	console.log(path);
+	//console.log(path);
 	if(path!=undefined)
 	{
 		/**
@@ -40,12 +56,14 @@ var processRequest=function (web,pathenc) {
 					'cover.JPG' , 'Cover.JPG' , 'folder.JPG','Folder.JPG',
 					'cover.PNG' , 'Cover.PNG' , 'folder.PNG','Folder.PNG',
 					'cover.png' , 'Cover.png' , 'folder.png','Folder.png'];
+
 		var splitted=(path.substring(0, path.lastIndexOf("/")+1))
 
 
 		for(var i in covers)
 		{
 			var coverFile=path+covers[i];
+
 			console.log("Searching for cover "+coverFile);
 			if(fs.existsSync(coverFile))
 			{
@@ -58,7 +76,7 @@ var processRequest=function (web,pathenc) {
 		for(var j in files) {
 			var fileName=S(files[j]);
 
-			console.log(fileName.s);
+			//console.log(fileName.s);
 			if(fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.JPG') || fileName.endsWith('.PNG')|| fileName.endsWith('.jpeg') || fileName.endsWith('.JPEG')) {
 				defer.resolve(path+'/'+fileName.s);
 				return defer.promise;
