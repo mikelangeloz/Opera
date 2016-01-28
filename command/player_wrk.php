@@ -22,12 +22,12 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							player_wrk.php
  * version:						1.0
  *
  */
- 
+
 // common include
 include('/var/www/inc/player_lib.php');
 ini_set('display_errors', '1');
@@ -39,7 +39,7 @@ $db = 'sqlite:/var/www/db/player.db';
 	if (!flock($lock, LOCK_EX | LOCK_NB)) {
 		die('already running');
 	}
-	 
+
 	switch ($pid = pcntl_fork()) {
 		case -1:
 			die('unable to fork');
@@ -52,11 +52,11 @@ $db = 'sqlite:/var/www/db/player.db';
 			fflush($lock);
 			exit;
 	}
-	 
+
 	if (posix_setsid() === -1) {
 		 die('could not setsid');
 	}
-	 
+
 	fclose(STDIN);
 	fclose(STDOUT);
 	fclose(STDERR);
@@ -216,8 +216,7 @@ sysCmd($cmd);
 }
 
 //Additional Fix for WLAN power management
-$cmd = "iwconfig wlan0 power off" ;
-sysCmd($cmd);
+
 
 // check current eth0 / wlan0 IP Address
 $cmd1 = "ip addr list eth0 |grep \"inet \" |cut -d' ' -f6|cut -d/ -f1";
@@ -267,7 +266,7 @@ if (isset($_SESSION['cmediafix']) && $_SESSION['cmediafix'] == 1) {
 	$mpd = openMpdSocket('localhost', 6600) ;
 	sendMpdCommand($mpd,'cmediafix');
 	closeMpdSocket($mpd);
-} 
+}
 // Utilities to start with Volumio
 
 // Shairport for Airplay Capability
@@ -288,38 +287,38 @@ if (isset($_SESSION['cmediafix']) && $_SESSION['cmediafix'] == 1) {
 	}
 
 playerSession('open',$db);
-$hostname = $_SESSION['hostname'];	
+$hostname = $_SESSION['hostname'];
 
 // Start Shairport with Volumio name, stopping Mpd on start, with Selected output device
 if (isset($_SESSION['shairport']) && $_SESSION['shairport'] == 1) {
 	$tempfile = '/tmp/.restart_mpd'; // if this file exists, start playing mpd after shairport stopped
 	$cmd = '/usr/local/bin/shairport -a "'.$hostname.'" -w -B "(/usr/bin/mpc | grep -q playing && touch \''.$tempfile.'\'); /usr/bin/mpc stop" -E "test -f \''.$tempfile.'\' && /usr/bin/mpc play && rm -f \''.$tempfile.'\'" -o alsa -- -d plughw:'.$device.' > /dev/null 2>&1 &';
 	sysCmd($cmd);
-} 
+}
 
 // Djmount daemon start for DLNA Browsing
 if (isset($_SESSION['djmount']) && $_SESSION['djmount'] == 1) {
 	$cmd = 'djmount -o allow_other,nonempty,iocharset=utf-8 /mnt/UPNP > /dev/null 2>&1 &';
 	sysCmd($cmd);
-} 
+}
 
 // Mpdupnpcli for UPNP control
 if (isset($_SESSION['upnpmpdcli']) && $_SESSION['upnpmpdcli'] == 1) {
 	$cmd = '/usr/bin/upmpdcli -f "'.$hostname.'" -l 0 > /dev/null 2>&1 &';
 	sysCmd($cmd);
-} 
+}
 
 // SPOP Daemon for Spotify Plaback
 if (isset($_SESSION['spotify']) && $_SESSION['spotify'] == 1) {
 	$cmd = ' spopd -c /etc/spopd.conf > /dev/null 2>&1 &';
 	sysCmd($cmd);
-} 
+}
 
 //Startup Sound
 if (isset($_SESSION['startupsound']) && $_SESSION['startupsound'] == 1) {
 $cmd = 'mpg123 -a hw:'.$device.' /var/www/inc/Sounds/startup.mp3 > /dev/null 2>&1 &';
 sysCmd($cmd);
-} 
+}
 
 
 // --- NORMAL STARTUP --- //
@@ -331,7 +330,7 @@ session_start();
 	// monitor loop
 	if ($_SESSION['w_active'] == 1 && $_SESSION['w_lock'] == 0) {
 	$_SESSION['w_lock'] = 1;
-	
+
 	// switch command queue for predefined jobs
 	switch($_SESSION['w_queue']) {
 
@@ -339,33 +338,33 @@ session_start();
 		$cmd = 'mpc stop && reboot';
 		sysCmd($cmd);
 		break;
-		
+
 		case 'poweroff':
 		$cmd = 'mpc stop && poweroff';
 		sysCmd($cmd);
 		break;
-		
+
 		case 'mpdrestart':
 		sysCmd('killall mpd');
 		sleep(1);
 		sysCmd('service mpd start');
 		break;
-		
+
 		case 'phprestart':
 		$cmd = 'service php5-fpm restart';
 		sysCmd($cmd);
 		break;
-		
+
 		case 'workerrestart':
 		$cmd = 'killall player_wrk.php';
 		sysCmd($cmd);
 		break;
-		
+
 		case 'updateui':
 		$cmd = 'git --work-tree=/var/www --git-dir=/var/www/.git pull origin master';
 		sysCmd($cmd);
 		break;
-		
+
 		case 'syschmod':
 		wrk_syschmod();
 		break;
@@ -377,12 +376,12 @@ session_start();
 		case 'totalbackup':
 		$_SESSION[$_SESSION['w_jobID']] = wrk_backup('dev');
 		break;
-		
+
 		case 'restore':
 		$path = "/run/".$_SESSION['w_queueargs'];
 		wrk_restore($path);
 		break;
-		
+
 		case 'orionprofile':
 		if ($_SESSION['dev'] == 1) {
 		$_SESSION['w_queueargs'] = 'dev';
@@ -390,7 +389,7 @@ session_start();
 		$cmd = "/var/www/command/orion_optimize.sh ".$_SESSION['w_queueargs'];
 		sysCmd($cmd);
 		break;
-		
+
 		case 'netcfg':
 		$file = '/etc/network/interfaces';
 		$fp = fopen($file, 'w');
@@ -420,15 +419,15 @@ session_start();
 			}
 		sysCmd('service networking restart');
 		break;
-		
+
 		case 'netcfgman':
 		$file = '/etc/network/interfaces';
 		$fp = fopen($file, 'w');
 		fwrite($fp, $_SESSION['w_queueargs']);
 		fclose($fp);
-		
+
 		break;
-		
+
 		case 'mpdcfg':
 		wrk_mpdconf('/etc',$db);
 		// update hash
@@ -437,7 +436,7 @@ session_start();
 		sysCmd('killall mpd');
 		sysCmd('service mpd start');
 		break;
-		
+
 		case 'mpdcfgman':
 		// write mpd.conf file
 		$fh = fopen('/etc/mpd.conf', 'w');
@@ -446,7 +445,7 @@ session_start();
 		sysCmd('killall mpd');
 		sysCmd('service mpd start');
 		break;
-		
+
 		case 'sourcecfg':
 		wrk_sourcecfg($db,$_SESSION['w_queueargs']);
 		// rel 1.0 autoFS
@@ -457,7 +456,7 @@ session_start();
 		// closeMpdSocket($mpd);
 		// }
 		break;
-		
+
 		// rel 1.0 autoFS
 		// case 'sourcecfgman':
 		// if ($_SESSION['w_queueargs'] == 'sourcecfgreset') {
@@ -473,7 +472,7 @@ session_start();
 		// closeMpdSocket($mpd);
 		// }
 		// break;
-		
+
 		case 'enableapc':
 		// apc.ini
 		$file = "/etc/php5/fpm/conf.d/20-apc.ini";
@@ -495,7 +494,7 @@ session_start();
 		sysCmd('service php5-fpm restart');
 		playerSession('write',$db,'enableapc',$_SESSION['w_queueargs']);
 		break;
-		
+
 	}
 	// reset locking and command queue
 	$_SESSION['w_queue'] = '';

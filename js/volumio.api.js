@@ -184,6 +184,7 @@ function getPlaylist(json){
                     output = output + content;
                 } else {
                     songpath = parsePath(data[i].file);
+                    if (songpath != undefined) {
                     content += '<div class="pl-entry">';
                     content += data[i].file.replace(songpath + '/', '') + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
                     content += ' <span>';
@@ -191,6 +192,7 @@ function getPlaylist(json){
                     content += songpath;
                     content += '</span></div></li>';
                     output = output + content;
+                    }
                 }
             }
         }
@@ -199,6 +201,7 @@ function getPlaylist(json){
 }
 
 function parsePath(str) {
+  if (str != undefined){
 	var cutpos=str.lastIndexOf("/");
 	//-- verify this switch! (Orion)
 	if (cutpos !=-1) {
@@ -207,6 +210,7 @@ function parsePath(str) {
         songpath = '';
 	}
 	return songpath;
+}
 }
 
 function pluginListItem(id, text, faicon, onclick) {
